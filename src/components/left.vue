@@ -17,11 +17,8 @@
     name: 'center',
     methods:{
         clickTab(tab){
+            if(tab!=this.$store.state.tab)
           this.$store.commit("tab",tab);
-          this.$store.commit("selectedBay",{});
-          this.$store.commit("selectedBayNumber",0);
-          this.$store.commit("anachnos",[]);
-          this.$store.commit("stachnos",[]);
         }
     },
     components:{

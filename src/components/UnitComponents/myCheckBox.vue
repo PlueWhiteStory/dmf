@@ -1,9 +1,9 @@
 <template class="myCheckBox">
-  <span class="ivu-checkbox,{ivu-checkbox-checked:true}">
-    <span class="ivu-checkbox-inner">
-  <input type="checkbox" :value="value" v-model="selected" class="ivu-checkbox-input" @on-change="onchange"/>
-    </span>
-    </span>
+  <!--<span class="ivu-checkbox,{ivu-checkbox-checked:true}">-->
+    <!--<span class="ivu-checkbox-inner">-->
+  <input type="checkbox" :value="value" v-model="selected"  @on-change="onchange"/>
+    <!--</span>-->
+    <!--</span>-->
 </template>
 <script>
   import 'iview/dist/styles/iview.css';
@@ -15,7 +15,7 @@
             }
         },
       computed:{
-            status{
+            status(){
               //const checked = event.target.checked;
             },
             selected(){

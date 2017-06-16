@@ -2,8 +2,8 @@
   <div id="app">
     <Row type="flex" justify="center" align="top" class="code-row-bg">
         <Col span="8"> <left class="left"></left></Col>
-        <Col span="8"><center class="center"></center></Col>
-        <Col span="8"> <right class="right"></right></Col>
+        <Col span="8"><center class="center" ></center></Col>
+        <Col span="8"> <right class="right" ></right></Col>
     </Row>
   </div>
 </template>
@@ -18,6 +18,7 @@ export default {
       this.$http.get('/static/data2.json').then(
           res=>{
               this.$store.commit('dmf',res.data);
+              winHeight:document.body.clientHeight;
           }
       )
 

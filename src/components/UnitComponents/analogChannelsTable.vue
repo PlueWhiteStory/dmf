@@ -1,6 +1,6 @@
 <template>
   <div>
-  <Table on-row-dblclick="dbclick" class="analogChannels" size="small" border :columns="columns" :data="analogChannels"></Table>
+  <Table  :height="winHeight" @on-row-dblclick="dbclick" @on-row-click="click" class="analogChannels" size="small" border :columns="columns" :data="analogChannels"></Table>
     <analogdetail :show="false" :row-analog="selectRow"></analogdetail>
     </div>
 </template>
@@ -11,17 +11,18 @@
         name: 'analogChannelsTable',
         data () {
             return {
+                winHeight: document.body.scrollHeight,
                 selectRow:[],
                 columns:[
                   {
-                    title: 'No',
+                    title: '#',
                     key: 'action',
                     width: 40,
                     align: 'center',
                     render: (h, params) => {
                       return h(mycheckbox,{
                         props: {
-                          value:params.index-1,
+                          value:params.index+1,
                           store:this.$store,
                           row:params.row,
                           ctype:'anachnos'
@@ -57,6 +58,9 @@
         dbclick(row){
           this.selectRow=row
 
+        },
+        click(row){
+            this.$store.commit("anaChnosChange",row);
         }
       },
       computed:{

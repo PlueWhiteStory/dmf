@@ -1,5 +1,5 @@
 <template>
-  <Table id="statusChannels" size="small" border :columns="columns" :data="statusChannels"></Table>
+  <Table  @on-row-click="click" :height="winHeight" id="statusChannels" size="small" border :columns="columns" :data="statusChannels"></Table>
 
 </template>
 <script >
@@ -8,16 +8,17 @@ import mycheckbox from './myCheckBox.vue'
         name: 'statusChannelsTable',
         data () {
             return {
+              winHeight: document.body.scrollHeight,
               columns:[
                 {
-                  title: 'No',
+                  title: '#',
                   key: 'action',
                   width: 40,
                   align: 'center',
                   render: (h, params) => {
                     return h(mycheckbox,{
                       props: {
-                        value:params.index-1,
+                        value:params.index+1,
                         store:this.$store,
                         row:params.row,
                         ctype:'stachnos'
@@ -55,6 +56,11 @@ import mycheckbox from './myCheckBox.vue'
         },
         statusChannels(){
           return this.dmf.statusChannels;
+        }
+      },
+      methods:{
+        click(row){
+          this.$store.commit("staChnosChange",row);
         }
       },
       components:{

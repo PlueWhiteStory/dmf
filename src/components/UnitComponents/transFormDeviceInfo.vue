@@ -62,7 +62,7 @@
             return {
                 locationMap:{
                   High:'高压侧',
-                  Medium:'中压',
+                  Medium:'中压侧',
                   Low:'低压侧',
                   Common:'公共绕组'
                 },
@@ -93,7 +93,6 @@
       methods:{
           addTransformerWindings(){
             var newTransformerWindings = JSON.parse(JSON.stringify(this.defaultTransformerWindings));
-            console.log(newTransformerWindings);
             this.selectedbay.transformerWindings.push(newTransformerWindings);
             this.transformerWindings=newTransformerWindings
             this.transformerWindingNumber=this.selectedbay.transformerWindings.length-1;
@@ -101,7 +100,7 @@
         delTransformerWindings(){
               if(this.selectedbay.transformerWindings.length<=1)
               {
-                  this.$Message.error("error").
+                  this.$Message.error("至少有一个绕组").
                 return ;
               }
               let idx = this.transformerWindingNumber;
@@ -111,20 +110,15 @@
                 this.selectedbay.transformerWindings.splice(idx,1);
         },
         locationSelected(index){//index 数组序号
-             this.transformerWindingNumber=index;
-            this.transformerWindings=this.selectedbay.transformerWindings[index];
-            var anaChnos=[];
-          this.transformerWindings.acvChn.chnNos.forEach(
-              idx=>{
-                  anaChnos.push(idx);
-              }
-          );
-          this.transformerWindings.accBran[0].chnNos.forEach(
-            idx=>{
-              anaChnos.push(idx);
-            }
-          );
+          this.transformerWindingNumber=index;
+          this.transformerWindings=this.selectedbay.transformerWindings[index];
+          var anaChnos=[];
+          anaChnos.push(...this.transformerWindings.acvChn.chnNos);
+          anaChnos.push(...this.transformerWindings.accBran[0].chnNos);
+          console.log("number",this.transformerWindingNumber);
           this.$store.commit('anachnos',anaChnos);
+          this.$store.commit('transformerWindingNumber',this.transformerWindingNumber);
+          this.$store.commit('transformerWindings',this.transformerWindings);
           },
           locationName(location){
             if(location==='')

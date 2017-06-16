@@ -24,7 +24,6 @@
                   width: 150,
                   align: 'center',
                   render: (h, params) => {
-                      console.log(params);
                     return h(inputbox,{
                       props: {
                         params:params.row,
@@ -78,7 +77,7 @@
           var anachnos=row.anaChnos;
           this.$store.commit('anachnos',anachnos);
           this.$store.commit('stachnos',row.staChnos)
-          this.$store.commit('selectedBay',row);
+          //this.$store.commit('selectedBay',row);
           this.$store.commit('selectedBayNumber',row.idx);
 
         }
